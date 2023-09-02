@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-
 <%@ include file="header.jsp" %>
-
 <!DOCTYPE html>
 <html>
    <head>
@@ -19,7 +16,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>Profile</h3>
+                     <h3>New Password</h3>
                   </div>
                </div>
             </div>
@@ -41,13 +38,12 @@
                   %>
                      <form action="UserController" method="post">
                         <fieldset>
-                           <input type="text" placeholder="First Name" name="fname" value="<%=u.getFname() %>" />
-                           <input type="text" placeholder="Last Name" name="lname"  value="<%=u.getLname() %>"/>
-                           <input type="text" placeholder="Email" name="email" value="<%=u.getEmail() %>"/>
-                           <input type="text" placeholder="Mobile" name="mobile"  value="<%=u.getMobile() %>"/>
-                           <textarea placeholder="Address" name="address"><%=u.getAddress() %></textarea>
                            
-                           <input type="submit" value="Update Profile" name="action"/>
+                           <input type="hidden" name="email" value="<%=request.getAttribute("email")%>">
+                          <input type="password" placeholder="New Password" name="new_password" required />
+                          <input type="password" placeholder="Confirm New Password" name="cnew_password" required />
+                           
+                           <input type="submit" value="Update Password" name="action"/>
                         </fieldset>
                      </form>
                   </div>

@@ -44,6 +44,7 @@
                            <input type="password" placeholder="Password" name="password" required />
                            
                            <input type="submit" value="Login" name="action"/>
+                           <a href="forgot-password.jsp">Forgot Password</a>
                         </fieldset>
                      </form>
                   </div>

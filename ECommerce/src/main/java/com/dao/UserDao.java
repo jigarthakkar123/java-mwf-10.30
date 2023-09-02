@@ -13,7 +13,7 @@ public class UserDao {
 	{
 		try {
 			Connection conn=UserUtil.createConnection();
-			String sql="insert into usr(fname,lname,email,mobile,address,password) values(?,?,?,?,?,?)";
+			String sql="insert into usr(fname,lname,email,mobile,address,password,usertype) values(?,?,?,?,?,?,?)";
 			PreparedStatement pst=conn.prepareStatement(sql);
 			pst.setString(1, u.getFname());
 			pst.setString(2, u.getLname());
@@ -21,6 +21,7 @@ public class UserDao {
 			pst.setLong(4, u.getMobile());
 			pst.setString(5, u.getAddress());
 			pst.setString(6, u.getPassword());
+			pst.setLong(7, u.getUsertype());
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,6 +57,7 @@ public class UserDao {
 			if(rs.next())
 			{
 				u=new User();
+				u.setUsertype(rs.getLong("usertype"));
 				u.setUid(rs.getInt("uid"));
 				u.setFname(rs.getString("fname"));
 				u.setLname(rs.getString("lname"));
@@ -77,6 +79,19 @@ public class UserDao {
 			PreparedStatement pst=conn.prepareStatement(sql);
 			pst.setString(1, password);
 			pst.setInt(2, uid);
+			pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void updatePassword(String email,String password)
+	{
+		try {
+			Connection conn=UserUtil.createConnection();
+			String sql="update usr set password=? where email=?";
+			PreparedStatement pst=conn.prepareStatement(sql);
+			pst.setString(1, password);
+			pst.setString(2, email);
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

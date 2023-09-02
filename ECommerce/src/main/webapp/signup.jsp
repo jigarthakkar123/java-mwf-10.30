@@ -38,6 +38,11 @@
                   %>
                      <form action="UserController" method="post">
                         <fieldset>
+                        	<select name="usertype">
+                        		<option>---Select User Type---</option>
+                        		<option value="1">Buyer</option>
+                        		<option value="2">Seller</option>
+                        	</select>
                            <input type="text" placeholder="First Name" name="fname" required />
                            <input type="text" placeholder="Last Name" name="lname" required />
                            <input type="text" placeholder="Email" name="email" required />

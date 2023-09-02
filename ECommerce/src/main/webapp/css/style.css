@@ -628,7 +628,7 @@ a:focus {
           align-items: center;
 }
 
-.subscribe_section .subscribe_form form input {
+.subscribe_section .subscribe_form form input,select {
     width: 100%;
     height: 60px;
     border: none;
@@ -640,19 +640,19 @@ a:focus {
     text-align: left;
 }
 
-.subscribe_section .subscribe_form form input::-webkit-input-placeholder {
+.subscribe_section .subscribe_form form input,select::-webkit-input-placeholder {
   color: #171620;
 }
 
-.subscribe_section .subscribe_form form input:-ms-input-placeholder {
+.subscribe_section .subscribe_form form input,select:-ms-input-placeholder {
   color: #171620;
 }
 
-.subscribe_section .subscribe_form form input::-ms-input-placeholder {
+.subscribe_section .subscribe_form form input,select::-ms-input-placeholder {
   color: #171620;
 }
 
-.subscribe_section .subscribe_form form input::placeholder {
+.subscribe_section .subscribe_form form input,select::placeholder {
   color: #171620;
 }
 
@@ -1054,7 +1054,7 @@ div.form_sub .field input[type="email"], div.form_sub .field input[type="email"]
     padding: 0 15px;
 }
 
-form input {
+form input,select {
     background: #fff;
     border: solid #ccc 1px;
     padding: 15px 15px;

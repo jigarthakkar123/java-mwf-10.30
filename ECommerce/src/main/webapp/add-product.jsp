@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-
 <%@ include file="header.jsp" %>
-
 <!DOCTYPE html>
 <html>
    <head>
@@ -19,7 +16,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>Profile</h3>
+                     <h3>Add Product</h3>
                   </div>
                </div>
             </div>
@@ -39,15 +36,20 @@
                   		out.println(request.getAttribute("msg"));
                   	}
                   %>
-                     <form action="UserController" method="post">
+                     <form action="UserController" method="post" enctype="multipart/form-data">
                         <fieldset>
-                           <input type="text" placeholder="First Name" name="fname" value="<%=u.getFname() %>" />
-                           <input type="text" placeholder="Last Name" name="lname"  value="<%=u.getLname() %>"/>
-                           <input type="text" placeholder="Email" name="email" value="<%=u.getEmail() %>"/>
-                           <input type="text" placeholder="Mobile" name="mobile"  value="<%=u.getMobile() %>"/>
-                           <textarea placeholder="Address" name="address"><%=u.getAddress() %></textarea>
+                        	<select name="usertype">
+                        		<option>---Select Product Category---</option>
+                        		<option value="Men">Men</option>
+                        		<option value="Women">Women</option>
+                        		<option value="Kids">Kids</option>
+                        	</select>
+                           <input type="text" placeholder="Product Name" name="product_name" required />
+                           <input type="text" placeholder="Product Price" name="product_price" required />
                            
-                           <input type="submit" value="Update Profile" name="action"/>
+                           <textarea placeholder="Product Description" name="product_desc" required></textarea>
+                           <input type="file" name="product_image">
+                           <input type="submit" value="Add Product" name="action"/>
                         </fieldset>
                      </form>
                   </div>

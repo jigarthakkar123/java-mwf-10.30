@@ -4,7 +4,7 @@ public class User {
 
 	private int uid;
 	private String fname,lname,email,address,password;
-	private long mobile;
+	private long mobile,usertype;
 	public int getUid() {
 		return uid;
 	}
@@ -47,6 +47,12 @@ public class User {
 	}
 	public void setMobile(long mobile) {
 		this.mobile = mobile;
+	}
+	public long getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(long usertype) {
+		this.usertype = usertype;
 	}
 	
 	
