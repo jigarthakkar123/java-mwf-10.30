@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bean.User;
+import com.bean.Wishlist;
 import com.dao.UserDao;
+import com.dao.WishlistDao;
 import com.service.Services;
 
 public class UserController extends HttpServlet {
@@ -58,6 +61,8 @@ public class UserController extends HttpServlet {
 				if(u.getPassword().equals(request.getParameter("password")))
 				{
 					HttpSession session=request.getSession();
+					List<Wishlist> list=WishlistDao.getWishlistByUser(u.getUid());
+					session.setAttribute("wishlist_count", list.size());
 					session.setAttribute("u", u);
 					if(u.getUsertype()==1)
 					{

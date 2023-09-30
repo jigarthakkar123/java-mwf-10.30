@@ -1,3 +1,5 @@
+<%@page import="com.dao.ProductDao"%>
+<%@page import="com.bean.Product"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ include file="header.jsp" %>
@@ -16,7 +18,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>Add Product</h3>
+                     <h3>Edit Product</h3>
                   </div>
                </div>
             </div>
@@ -31,6 +33,7 @@
                <div class="col-lg-8 offset-lg-2">
                   <div class="full">
                   <%
+                  	Product p=ProductDao.getProduct(Integer.parseInt(request.getParameter("pid")));
                   	if(request.getAttribute("msg")!=null)
                   	{
                   		out.println(request.getAttribute("msg"));
@@ -38,18 +41,47 @@
                   %>
                      <form action="ProductController" method="post" enctype="multipart/form-data">
                         <fieldset>
+                        <input type="hidden" name="pid" value="<%=p.getPid()%>">
                         	<select name="product_category">
-                        		<option>---Select Product Category---</option>
-                        		<option value="Men">Men</option>
-                        		<option value="Women">Women</option>
-                        		<option value="Kids">Kids</option>
+                        		<%
+                        			if(p.getProduct_category().equals("Men"))
+                        			{
+                        		%>
+                        				<option>---Select Product Category---</option>
+		                        		<option value="Men" selected="selected">Men</option>
+		                        		<option value="Women">Women</option>
+		                        		<option value="Kids">Kids</option>
+                        		<%
+                        			}
+                        			else if(p.getProduct_category().equals("Women"))
+                        			{
+                        		%>
+                        				<option>---Select Product Category---</option>
+		                        		<option value="Men">Men</option>
+		                        		<option value="Women" selected="selected">Women</option>
+		                        		<option value="Kids">Kids</option>
+                        		<%		
+                        			}
+                        			else if(p.getProduct_category().equals("Kids"))
+                        			{
+                        		%>
+                        				<option>---Select Product Category---</option>
+		                        		<option value="Men">Men</option>
+		                        		<option value="Women">Women</option>
+		                        		<option value="Kids" selected="selected">Kids</option>
+                        		<%		
+                        			}
+                        		%>
+                        		
                         	</select>
-                           <input type="text" placeholder="Product Name" name="product_name" required />
-                           <input type="text" placeholder="Product Price" name="product_price" required />
+                           <input type="text" placeholder="Product Name" name="product_name" value="<%=p.getProduct_name() %>" />
+                           <input type="text" placeholder="Product Price" name="product_price"  value="<%=p.getProduct_price() %>" />
                            
-                           <textarea placeholder="Product Description" name="product_desc" required></textarea>
+                           <textarea placeholder="Product Description" name="product_desc"><%=p.getProduct_desc() %></textarea>
+                           <img alt="" src="product_images/<%=p.getProduct_image()%>">
+                           <input type="hidden" name="product_image1" value="<%=p.getProduct_image()%>">
                            <input type="file" name="product_image">
-                           <input type="submit" value="Add Product" name="action"/>
+                           <input type="submit" value="Update Product" name="action"/>
                         </fieldset>
                      </form>
                   </div>

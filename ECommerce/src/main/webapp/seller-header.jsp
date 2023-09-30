@@ -77,7 +77,7 @@
                            <a class="nav-link" href="product.jsp">Add Product</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="blog_list.jsp">View Product</a>
+                           <a class="nav-link" href="view-product.jsp">View Product</a>
                         </li>
                        
 

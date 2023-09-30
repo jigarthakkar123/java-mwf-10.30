@@ -25,6 +25,9 @@
       <link href="css/responsive.css" rel="stylesheet" />
    </head>
    <body>
+   <%
+   User u=null;
+   %>
       <div class="hero_area">
          <!-- header section strats -->
          <header class="header_section">
@@ -44,7 +47,7 @@
                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Account <span class="caret"></span></a>
                            <ul class="dropdown-menu">
                            		<%
-                           			User u=null;
+                           			
     		  						if(session!=null)
     		  						{
     		  							if(session.getAttribute("u")!=null)
@@ -66,6 +69,7 @@
                            		%>
                            					<li><a href="profile.jsp">Profile</a></li>
                            					<li><a href="change-password.jsp">Change Password</a></li>
+                           					
                            					<li><a href="logout.jsp">Logout(<%=u.getFname() %>)</a></li>
                            		<%		
                            			}
@@ -74,7 +78,7 @@
                            </ul>
                         </li>
                         <%
-                        	if(u!=null && u.getUsertype()==1)
+                        	if(u==null || u.getUsertype()==1)
                         	{
                         %>
                         <li class="nav-item">
@@ -83,9 +87,16 @@
                         <li class="nav-item">
                            <a class="nav-link" href="product.jsp">Products</a>
                         </li>
+                        <%
+                        	if(u!=null)
+                        	{
+                        %>
                         <li class="nav-item">
-                           <a class="nav-link" href="blog_list.jsp">Blog</a>
+                           <a class="nav-link" href="wishlist.jsp">Wishlist(<%=session.getAttribute("wishlist_count") %>)</a>
                         </li>
+                        <%
+                        	}
+                        %>
                         <li class="nav-item">
                            <a class="nav-link" href="contact.jsp">Contact</a>
                         </li>
@@ -146,14 +157,14 @@
                            </a>
                         </li>
                         <%	}
-                        	else
+                        	else if(u.getUsertype()==2)
                         	{
                         %>
                         <li class="nav-item">
                            <a class="nav-link" href="add-product.jsp">Add Product</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="blog_list.jsp">View Product</a>
+                           <a class="nav-link" href="view-product.jsp">View Product</a>
                         </li>
                         <%
                         	}
