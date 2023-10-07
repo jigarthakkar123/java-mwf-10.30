@@ -71,6 +71,32 @@ public class UserDao {
 		}
 		return u;
 	}
+	public static User loginUserMobile(long mobile)
+	{
+		User u=null;
+		try {
+			Connection conn=UserUtil.createConnection();
+			String sql="select * from usr where mobile=?";
+			PreparedStatement pst=conn.prepareStatement(sql);
+			pst.setLong(1, mobile);
+			ResultSet rs=pst.executeQuery();
+			if(rs.next())
+			{
+				u=new User();
+				u.setUsertype(rs.getLong("usertype"));
+				u.setUid(rs.getInt("uid"));
+				u.setFname(rs.getString("fname"));
+				u.setLname(rs.getString("lname"));
+				u.setEmail(rs.getString("email"));
+				u.setMobile(rs.getLong("mobile"));
+				u.setAddress(rs.getString("address"));
+				u.setPassword(rs.getString("password"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
 	public static void changePassword(int uid,String password)
 	{
 		try {

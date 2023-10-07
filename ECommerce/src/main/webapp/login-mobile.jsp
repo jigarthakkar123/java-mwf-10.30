@@ -39,12 +39,12 @@
                      <form action="UserController" method="post">
                         <fieldset>
                            
-                           <input type="text" placeholder="Email" name="email" required />
+                           <input type="text" placeholder="Mobile" name="mobile" required />
                           
-                           <input type="password" placeholder="Password" name="password" required />
                            
-                           <input type="submit" value="Login" name="action"/>
-                           <a href="login-mobile.jsp">Login Via Mobile?</a>
+                           
+                           <input type="submit" value="Login-mobile" name="action"/>
+                           <a href="login.jsp">Login Via Email?</a>
                            <br><br><br>
                            <a href="forgot-password.jsp">Forgot Password</a>
                            

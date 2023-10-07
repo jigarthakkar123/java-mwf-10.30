@@ -10,10 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bean.Cart;
 import com.bean.User;
 import com.bean.Wishlist;
+import com.dao.CartDao;
 import com.dao.UserDao;
 import com.dao.WishlistDao;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.service.Services;
 
 public class UserController extends HttpServlet {
@@ -63,6 +68,8 @@ public class UserController extends HttpServlet {
 					HttpSession session=request.getSession();
 					List<Wishlist> list=WishlistDao.getWishlistByUser(u.getUid());
 					session.setAttribute("wishlist_count", list.size());
+					List<Cart> list1=CartDao.getCartByUser(u.getUid());
+					session.setAttribute("cart_count", list1.size());
 					session.setAttribute("u", u);
 					if(u.getUsertype()==1)
 					{
@@ -83,6 +90,33 @@ public class UserController extends HttpServlet {
 			{
 				request.setAttribute("msg", "Email or Password Is Incorrect");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+		}
+		else if(action.equalsIgnoreCase("login-mobile"))
+		{
+			User u=UserDao.loginUserMobile(Long.parseLong(request.getParameter("mobile")));
+			String mobile=request.getParameter("mobile");
+			if(u!=null)
+			{
+				Random t = new Random();
+		    	int minRange = 1000, maxRange= 9999;
+	        	int otp = t.nextInt(maxRange - minRange) + minRange;
+				try {
+					HttpResponse response1 = Unirest.get("https://www.fast2sms.com/dev/bulkV2?authorization=DwF5Auzh16qo3fXC2JMSTcOiyBEZmWH0eR8GIg4NbQrpUnKsjvhz0YwyOCGvHJEFuXRrTc7feDVaM1NA&variables_values="+otp+"&route=otp&numbers="+mobile)
+							  .header("cache-control", "no-cache")
+							  .asString();
+					request.setAttribute("mobile", mobile);
+					request.setAttribute("otp", otp);
+					request.getRequestDispatcher("otp-mobile.jsp").forward(request, response);
+				} catch (UnirestException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				request.setAttribute("msg", "Mobile Not Registered");
+				request.getRequestDispatcher("login-mobile.jsp").forward(request, response);
 			}
 		}
 		else if(action.equalsIgnoreCase("change password"))
@@ -166,6 +200,37 @@ public class UserController extends HttpServlet {
 	        	request.setAttribute("otp", otp);
 	        	request.setAttribute("msg", "Invalid OTP");
 	        	request.getRequestDispatcher("otp.jsp").forward(request, response);
+			}
+		}
+		else if(action.equalsIgnoreCase("verify otp mobile"))
+		{
+			long mobile=Long.parseLong(request.getParameter("mobile"));
+			int otp=Integer.parseInt(request.getParameter("otp"));
+			int uotp=Integer.parseInt(request.getParameter("uotp"));
+			User u=UserDao.loginUserMobile(mobile);
+			if(otp==uotp)
+			{
+				HttpSession session=request.getSession();
+				List<Wishlist> list=WishlistDao.getWishlistByUser(u.getUid());
+				session.setAttribute("wishlist_count", list.size());
+				List<Cart> list1=CartDao.getCartByUser(u.getUid());
+				session.setAttribute("cart_count", list1.size());
+				session.setAttribute("u", u);
+				if(u.getUsertype()==1)
+				{
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
+				else
+				{
+					request.getRequestDispatcher("seller-index.jsp").forward(request, response);
+				}
+			}
+			else
+			{
+				request.setAttribute("mobile", mobile);
+	        	request.setAttribute("otp", otp);
+	        	request.setAttribute("msg", "Invalid OTP");
+	        	request.getRequestDispatcher("otp-mobile.jsp").forward(request, response);
 			}
 		}
 		else if(action.equalsIgnoreCase("update password"))

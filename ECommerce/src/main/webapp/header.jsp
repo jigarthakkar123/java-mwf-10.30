@@ -94,6 +94,9 @@
                         <li class="nav-item">
                            <a class="nav-link" href="wishlist.jsp">Wishlist(<%=session.getAttribute("wishlist_count") %>)</a>
                         </li>
+                        <%-- <li class="nav-item">
+                           <a class="nav-link" href="cart.jsp">Cart(<%=session.getAttribute("cart_count") %>)</a>
+                        </li> --%>
                         <%
                         	}
                         %>
@@ -101,7 +104,7 @@
                            <a class="nav-link" href="contact.jsp">Contact</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#">
+                           <a class="nav-link" href="cart.jsp">
                               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                                  <g>
                                     <g>
@@ -154,6 +157,7 @@
                                  <g>
                                  </g>
                               </svg>
+                              (<%=session.getAttribute("cart_count") %>)
                            </a>
                         </li>
                         <%	}

@@ -1,3 +1,5 @@
+<%@page import="com.dao.CartDao"%>
+<%@page import="com.bean.Cart"%>
 <%@page import="com.dao.ProductDao"%>
 <%@page import="com.bean.Product"%>
 <%@page import="java.util.List"%>
@@ -9,6 +11,26 @@
    <head>
       
    </head>
+   <%
+	int id=0;
+	out.print("Id : "+id);
+	try{
+		id=Integer.parseInt(request.getParameter("id"));
+	}catch(Exception e){
+	}
+	if(id!=0)
+	{
+		out.print("Id : "+id);
+		List<Cart> list=CartDao.getCartByUser(id);
+		for(Cart c:list)
+		{
+			CartDao.updateCartPaymentStatus(id);
+		}
+		List<Cart> list1=CartDao.getCartByUser(id);
+		session.setAttribute("cart_count", list1.size());
+		response.sendRedirect("cart.jsp");
+	}
+%>
    <body>
       <div class="hero_area">
       

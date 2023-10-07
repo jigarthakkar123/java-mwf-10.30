@@ -16,7 +16,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>Login</h3>
+                     <h3>Verify OTP</h3>
                   </div>
                </div>
             </div>
@@ -38,15 +38,12 @@
                   %>
                      <form action="UserController" method="post">
                         <fieldset>
-                           
-                           <input type="text" placeholder="Email" name="email" required />
+                           <input type="hidden" name="mobile" value="<%=request.getAttribute("mobile")%>">
+                           <input type="hidden" name="otp" value="<%=request.getAttribute("otp")%>"> 
+                           <input type="text" placeholder="Enter OTP" name="uotp" required />
                           
-                           <input type="password" placeholder="Password" name="password" required />
                            
-                           <input type="submit" value="Login" name="action"/>
-                           <a href="login-mobile.jsp">Login Via Mobile?</a>
-                           <br><br><br>
-                           <a href="forgot-password.jsp">Forgot Password</a>
+                           <input type="submit" value="Verify OTP Mobile" name="action"/>
                            
                         </fieldset>
                      </form>
