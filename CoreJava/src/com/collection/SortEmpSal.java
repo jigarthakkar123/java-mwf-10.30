@@ -43,7 +43,7 @@ public class SortEmpSal implements Comparator<Emp>{
 		Emp e4=new Emp();
 		e4.setEid(4);
 		e4.setEname("Jignesh");
-		e4.setSal(700000);
+		e4.setSal(600000);
 		
 		
 		list.add(e1);
